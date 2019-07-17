@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+    <template id="search_template_analytic_inherit" inherit_id="account_reports.search_template_analytic">
+        <xpath expr="//a[hasclass('dropdown-toggle','account_analytic_filter')]" position="replace">
+            <a type="button" class="dropdown-toggle account_analytic_filter" data-toggle="dropdown">
+            <span class="fa fa-folder-open"/> Business
+            <span class="caret"/>
+            </a>
+        </xpath>
+        <xpath expr="//b[1]" position="replace">
+            <b>Business Units</b><br />
+        </xpath>
+        <xpath expr="//div[hasclass('dropdown-menu','o_filters_menu')]/div[2]/b" position="replace">
+            <b>Business Lines</b><br />
+        </xpath>
+    </template>
+
+	<template id="search_template_operatings">
+        <a type="button" class="dropdown-toggle" data-toggle="dropdown">
+            <span class="fa fa-filter"/>
+            Operatings:
+            <t t-set="operating_value" t-value="'All'"/>
+            <t t-foreach="options['operatings']" t-as="opp">
+                <t t-if="opp.get('selected') == True">
+                    <t t-set="operating_value" t-value="''"/>
+                    <t t-esc="opp.get('name')"/>
+                </t>
+            </t>
+            <t t-esc="operating_value"/>
+            <span class="caret"/>
+        </a>
+        <ul class="dropdown-menu o_filters_menu" role="menu">
+            <t t-foreach="options['operatings']" t-as="opp">
+                <t t-if="opp.get('id') == 'divider'">
+                    <li class="divider"></li>
+                    <li><b style="margin-left: 5px;"><t t-esc="opp.get('name')"/></b></li>
+                    <li class="divider"></li>
+                </t>
+                <t t-if="opp.get('id')!= 'divider'">
+                    <li t-att-title="opp.get('name')" data-filter="operatings" t-att-data-id="opp.get('id')" class="js_account_report_choice_filter"><a><t t-esc="opp.get('name')"/></a></li>
+                </t>
+            </t>
+        </ul>
+    </template>
+
+    <template id="search_template_custom" inherit_id="account_reports.search_template">
+        <xpath expr="//div[hasclass('btn-group', 'o_dropdown','o_account_reports_filter_journals')]" position="after">
+            <div class="btn-group o_dropdown o_account_reports_filter_operatings" t-if="options.get('operatings') != None">
+                <t t-call="operating_unit_module.search_template_operatings"/>
+            </div>
+        </xpath>
+    </template>
+</data>
+</odoo>

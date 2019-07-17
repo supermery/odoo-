@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+    <template id="filter_info_template_inherit" inherit_id="account_reports.filter_info_template">
+        <xpath expr="//div[hasclass('col-12')]" position="after">
+            <t t-if="options.get('operatings')">
+                Operatings:
+                <t t-set="operating_value" t-value="'All'"/>
+                <t t-foreach="options['operatings']" t-as="opp">
+                    <t t-if="opp.get('selected') == True">
+                        <t t-set="operating_value" t-value="''"/>
+                        <t t-esc="opp.get('code')"/>
+                    </t>
+                </t>
+                <t t-esc="operating_value"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="main_template_inherit" inherit_id="account_reports.main_template">
+        <xpath expr="//div[hasclass('o_account_reports_header')]/t[3]" position="replace">
+            <t t-call="operating_unit_module.filter_info_template_inherit"/>
+        </xpath>
+    </template>
+</data>
+</odoo>

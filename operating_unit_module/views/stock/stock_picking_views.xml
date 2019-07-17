@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="vpicktree" model="ir.ui.view">
+	        <field name="name">stock.picking.tree</field>
+	        <field name="model">stock.picking</field>
+	        <field name="inherit_id" ref="stock.vpicktree"/>
+	        <field name="arch" type="xml">
+	            <xpath expr="//field[@name='origin']" position="after">
+	                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+	            </xpath>
+	        </field>
+    	</record>
+
+	    <record id="view_picking_form" model="ir.ui.view">
+	        <field name="name">stock.picking.form</field>
+	        <field name="model">stock.picking</field>
+	        <field name="inherit_id" ref="stock.view_picking_form"/>
+	        <field name="arch" type="xml">
+	            <xpath expr="//field[@name='company_id']" position="after">
+	                <field name="operating_unit_id" options="{'no_create': True}" domain = "[('company_id','=', company_id)]"
+	                       groups="operating_unit.group_multi_operating_unit"/>
+	            </xpath>
+	        </field>
+	    </record>
+
+	    <record id="view_picking_internal_search" model="ir.ui.view">
+	        <field name="name">stock.picking.internal.search</field>
+	        <field name="model">stock.picking</field>
+	        <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+	        <field name="arch" type="xml">
+	            <field name="product_id" position="after">
+	                <field name="operating_unit_id" groups="operating_unit.group_multi_operating_unit"/>
+	            </field>
+	            <xpath expr="//filter[@name='picking_type']" position="before">
+	                <filter name="operating_unit" string="Operating Unit" domain="[]" context="{'group_by':'operating_unit_id'}"
+	                        groups="operating_unit.group_multi_operating_unit"/>
+	            </xpath>
+	        </field>
+	    </record>
+</data>
+</odoo>
