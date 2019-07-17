@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="sale_order_salon_form_view" model="ir.ui.view">
+			<field name="name">sale.order.salon.form</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_form" />
+			<field name="arch" type="xml">
+				<field name="validity_date" position="after">
+					<field name="is_salon_so" />
+					<field name="as_salon_id"
+						attrs="{'invisible': [('is_salon_so', '=', False)], 'required': [('is_salon_so', '=', True)]}" domain="[('allowed_users_ids', '=', 'Administrator')]"/>
+					<field name="operating_unit"/>
+				</field>
+
+				<xpath expr="//field[@name='payment_term_id']" position="attributes">
+					<attribute name="attrs">{'invisible': [('is_salon_so','=',True)]}</attribute>
+				</xpath>
+
+				<!--<xpath expr="//field[@name='loading_type_id']" position="attributes">-->
+					<!--<attribute name="attrs">{'invisible': [('is_salon_so','=',True)]}</attribute>-->
+				<!--</xpath>-->
+
+				<!--<xpath expr="//field[@name='pc_lancement_line_id']" position="attributes">-->
+					<!--<attribute name="attrs">{'invisible': [('is_salon_so','=',True)]}</attribute>-->
+				<!--</xpath>-->
+
+				<!--<xpath expr="//page[@name='other_information']" position="attributes">-->
+					<!--<attribute name="attrs">{'invisible': [('is_salon_so','=',True)]}</attribute>-->
+				<!--</xpath>-->
+
+				<!--<xpath expr="//field[@name='order_line']/tree//field[@name='tax_id']" position="attributes">-->
+					<!--<attribute name="attrs">{'readonly': [('qty_invoiced', '&gt;', 0)],'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>-->
+				<!--</xpath>-->
+
+				<!--<xpath expr="//field[@name='order_line']/tree//field[@name='price_unit']" position="attributes">-->
+					<!--<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>-->
+				<!--</xpath>-->
+
+				<!--<xpath expr="//field[@name='order_line']/tree//field[@name='price_subtotal']" position="attributes">-->
+					<!--<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>-->
+				<!--</xpath>-->
+
+				<!--<xpath expr="//group[@name='sale_total']" position="attributes">-->
+					<!--<attribute name="attrs">{'invisible': [('is_salon_so','=',True)]}</attribute>-->
+				<!--</xpath>-->
+
+				<!--<xpath expr="//field[@name='order_line']/tree//field[@name='quantity_j_3']" position="attributes">-->
+					<!--<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>-->
+				<!--</xpath>-->
+
+				<!--<xpath expr="//field[@name='order_line']/tree//field[@name='quantity_j_2']" position="attributes">-->
+					<!--<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>-->
+				<!--</xpath>-->
+
+				<!--<xpath expr="//field[@name='order_line']/tree//field[@name='quantity_j_1']" position="attributes">-->
+					<!--<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>-->
+				<!--</xpath>-->
+
+				<!--<xpath expr="//field[@name='order_line']/tree//field[@name='hle']" position="attributes">-->
+					<!--<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>-->
+				<!--</xpath>-->
+
+				<!--<xpath expr="//field[@name='order_line']/tree//field[@name='journey']" position="attributes">-->
+					<!--<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>-->
+				<!--</xpath>-->
+
+				<!--<xpath expr="//field[@name='order_line']/tree//field[@name='cycle_id']" position="attributes">-->
+					<!--<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>-->
+				<!--</xpath>-->
+
+			</field>
+		</record>
+
+		<record id="sale_order_salon_tree_view" model="ir.ui.view">
+			<field name="name">sale.order.salon.tree</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_tree"/>
+			<field name="arch" type="xml">
+				<field name="user_id" position="after">
+					<field name="as_salon_id"/>
+					<field name="operating_unit"/>
+				</field>
+			</field>
+		</record>
+
+		<record id="action_orders_salon" model="ir.actions.act_window">
+            <field name="name">Sales Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+            <field name="context">{'default_is_salon_so':True}</field>
+            <field name="domain">[('is_salon_so', '=', True)]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new quotation, the first step of a new sale!
+                </p><p>
+                    Once the quotation is confirmed, it becomes a sales order.<br/> You will be able to create an invoice and collect the payment.
+                </p>
+            </field>
+        </record>
+
+		<menuitem action="action_orders_salon" id="menu_orders_salon"
+			parent="atlas_salon_module.menu_salon_configuration" sequence="4" />
+
+
+	</data>
+</odoo>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_as_salon_tree" model="ir.ui.view">
+            <field name="name">as.salon.tree</field>
+            <field name="model">as.salon</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="note"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_as_salon_form" model="ir.ui.view">
+            <field name="name">as.salon.form</field>
+            <field name="model">as.salon</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Salons">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button"
+                                    icon="fa-globe">
+                                <field name="active" widget="boolean_button"/>
+                            </button>
+                        </div>
+                        <group col="3" string="Fiche Signalitique Salon">
+                            <field name="name" required="1"/>
+                            <field name="note" required="1"/>
+                            <field name="allowed_users_ids" widget="many2many_tags"/>
+                            <field name="contact_id"/>
+                            <field name="contract_id"/>
+                            <field name="operating_unit"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_as_salon">
+            <field name="name">Salon</field>
+            <field name="res_model">as.salon</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create new filed
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Salon" id="salon_menu_root"/>
+
+        <menuitem id="menu_salon_configuration" name="Paramétrage"
+                  parent="salon_menu_root"/>
+
+        <menuitem id="menu_salon" name="Salon" parent="menu_salon_configuration"
+                  sequence="2" action="action_as_salon"/>
+
+    </data>
+</odoo>

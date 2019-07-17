@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+       <!-- Adds all assets in Odoo -->
+        <template id="assets_backend" inherit_id="web.assets_frontend" active="False" customize_show="True" name="Operating Unit and Salon">
+            <xpath expr="." position="inside">
+		<!--These links will be called when loading your Odoo -->
+                <script type="text/javascript" src="/atlas_salon_module/static/src/js/item.js"></script>
+                    <link href="/atlas_salon_module/static/src/css/item.css" rel="stylesheet" type="text/css"/>
+            </xpath>
+        </template>
+
+
+        <template id="products_categories" inherit_id="website_sale.products" name="Operating Unit">
+            <xpath expr="//div[@id='products_grid_before']" position="before">
+                <div class="col-lg-3 col-md-4 col-12">
+                <ul class="nav nav-pills flex-column mt16">
+                    <li class="nav-item">
+                        <a t-att-href="keep('/shop',operating=0)"
+                           t-attf-class="nav-link#{'' if operating else ' active'} o_not_editable">All Operating Unit
+                        </a>
+                    </li>
+                    <t t-foreach="request.env['operating.unit'].search ([])" t-as="opu">
+                        <t t-if="opu.active == True">
+
+                            <a t-att-href="keep('#' + slug(opu))" class="item1"  onclick="myFunction()">
+                              <span t-field="opu.name"/>
+                            </a>
+
+                        </t>
+                    </t>
+                </ul>
+                </div>
+
+                <ul class="nav nav-pills flex-column mt16 ">
+                    <li class="nav-item">
+                        <a t-att-href="keep('/shop',operating=0)"
+                           t-attf-class="nav-link#{'' if operating else ' active'} o_not_editable">All Salons
+                        </a>
+                    </li>
+                    <t t-foreach="request.env['as.salon'].search ([])" t-as="salon">
+                        <t t-if="salon.active == True">
+                            <a t-att-href="keep('#' + slug(salon))"
+                               class="item2"  onclick="myFunction1()">
+                                <span t-field="salon.name"/>
+                            </a>
+                        </t>
+                    </t>
+                </ul>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

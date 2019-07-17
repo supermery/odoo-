@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="view_as_contract_tree" model="ir.ui.view">
+			<field name="name">as.contract.tree</field>
+			<field name="model">as.contract</field>
+			<field name="priority" eval="8" />
+			<field name="arch" type="xml">
+				<tree>
+					<field name="num_contract" />
+					<field name="duration_from" />
+					<field name="duration_to" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="view_as_contract_form" model="ir.ui.view">
+			<field name="name">as.contract.form</field>
+			<field name="model">as.contract</field>
+			<field name="priority" eval="8" />
+			<field name="arch" type="xml">
+				<form string="Customer Contract">
+					<sheet>
+						<group col="3">
+							<field name="num_contract" />
+							<field name="duration_from" />
+							<field name="duration_to" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_as_contract">
+			<field name="name">Customer Cotract</field>
+			<field name="res_model">as.contract</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="domain">[]</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Create new Contract
+				</p>
+			</field>
+		</record>
+
+		<menuitem name="Salon" id="salon_menu_root" />
+
+		<menuitem id="menu_salon_configuration" name="Paramétrage"
+			parent="salon_menu_root" />
+
+		<menuitem id="menu_salon" name="Salon" parent="menu_salon_configuration"
+			sequence="2" action="action_as_salon" />
+		<menuitem id="menu_contract" name="Customer contract" parent="menu_salon_configuration"
+			action="action_as_contract" />
+
+	</data>
+</odoo>

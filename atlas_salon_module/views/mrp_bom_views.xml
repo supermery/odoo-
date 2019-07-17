@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="action_salon_mrp_bom" model="ir.actions.act_window">
+			<field name="name">Bill OF Materials</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">mrp.bom</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context">{'default_is_salon_bom':True}</field>
+			<field name="domain">[('is_salon_bom', '=', True)]</field>
+
+		</record>
+
+		<record id="salon_mrp_bom_form_view_inherit" model="ir.ui.view">
+			<field name="name">mrp.bom.form</field>
+			<field name="model">mrp.bom</field>
+			<field name="inherit_id" ref="mrp.mrp_bom_form_view" />
+			<field name="arch" type="xml">
+				<field name="bom_type" position="after">
+					<field name="is_salon_bom" />
+				</field>
+
+			</field>
+		</record>
+
+		<menuitem id="yield_base_menu" parent="atlas_salon_module.salon_menu_root"
+			sequence="3" action="action_salon_mrp_bom" />
+
+	</data>
+</odoo>
