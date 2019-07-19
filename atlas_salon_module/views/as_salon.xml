@@ -23,17 +23,15 @@
                 <form string="Salons">
                     <sheet>
                         <div class="oe_button_box" name="button_box">
-                            <button name="toggle_active" type="object" class="oe_stat_button"
-                                    icon="fa-globe">
-                                <field name="active" widget="boolean_button"/>
-                            </button>
+                            <button class="oe_stat_button" name="toggle_active" type="object" icon="fa-globe" >
+				<field name="active" widget="website_button" modifiers="{}"/>
+			</button>
                         </div>
                         <group col="3" string="Fiche Signalitique Salon">
                             <field name="name" required="1"/>
                             <field name="note" required="1"/>
                             <field name="allowed_users_ids" widget="many2many_tags"/>
-                            <field name="contact_id"/>
-                            <field name="contract_id"/>
+                            <field name="partner_id"/>
                             <field name="operating_unit"/>
                         </group>
                     </sheet>

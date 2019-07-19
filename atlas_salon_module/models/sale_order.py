@@ -13,12 +13,8 @@ class SaleOrder(models.Model):
 
     @api.onchange('as_salon_id')
     def onchange_as_salon_id(self):
-        listids = []
-        if self.as_salon_id:
-            for each in self.as_salon_id:
-                listids.append(each.id)
-                domain = {'allowed_users_ids': [('ids', 'in', listids)]}
-                return {'domain': domain, 'value': {'allowed_users_ids': []}}
+        self.operating_unit = self.as_salon_id.operating_unit.id
+        self.partner_id = self.as_salon_id.partner_id.id
 
 class Website(models.Model):
     _inherit = 'website'
@@ -29,7 +25,7 @@ class Website(models.Model):
         values.update({
             'is_salon_so': True,
             'as_salon_id': 1,
-            'operating_unit':1,
+            'operating_unit':2,
         })
         return values
 

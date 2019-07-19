@@ -20,7 +20,6 @@ class MyController(http.Controller):
         product_custom_attribute_values = None
         if kw.get('product_custom_attribute_values'):
             product_custom_attribute_values = json.loads(kw.get('product_custom_attribute_values'))
-
         no_variant_attribute_values = None
         if kw.get('no_variant_attribute_values'):
             no_variant_attribute_values = json.loads(kw.get('no_variant_attribute_values'))
@@ -32,7 +31,7 @@ class MyController(http.Controller):
             product_custom_attribute_values=product_custom_attribute_values,
             no_variant_attribute_values=no_variant_attribute_values
         )
-        return request.redirect("/shop/cart")
+        # return request.redirect("/shop/cart")
 
     @http.route ( ['/shop/<string:variable>'],type='http', auth="public", methods=['GET'], website=True )
     def view(self, **kwargs):

@@ -8,9 +8,9 @@
 			<field name="inherit_id" ref="sale.view_order_form" />
 			<field name="arch" type="xml">
 				<field name="validity_date" position="after">
-					<field name="is_salon_so" />
+					<field name="is_salon_so" readonly="1"/>
 					<field name="as_salon_id"
-						attrs="{'invisible': [('is_salon_so', '=', False)], 'required': [('is_salon_so', '=', True)]}" domain="[('allowed_users_ids', '=', 'Administrator')]"/>
+						attrs="{'invisible': [('is_salon_so', '=', False)], 'required': [('is_salon_so', '=', True)]}" domain="[('allowed_users_ids', '=', uid)]"/>
 					<field name="operating_unit"/>
 				</field>
 
@@ -18,57 +18,53 @@
 					<attribute name="attrs">{'invisible': [('is_salon_so','=',True)]}</attribute>
 				</xpath>
 
-				<!--<xpath expr="//field[@name='loading_type_id']" position="attributes">-->
-					<!--<attribute name="attrs">{'invisible': [('is_salon_so','=',True)]}</attribute>-->
-				<!--</xpath>-->
+				<xpath expr="//field[@name='loading_type_id']" position="attributes">
+					<attribute name="attrs">{'invisible': [('is_salon_so','=',True)]}</attribute>
+				</xpath>
 
-				<!--<xpath expr="//field[@name='pc_lancement_line_id']" position="attributes">-->
-					<!--<attribute name="attrs">{'invisible': [('is_salon_so','=',True)]}</attribute>-->
-				<!--</xpath>-->
+				<xpath expr="//field[@name='pc_lancement_line_id']" position="attributes">
+					<attribute name="attrs">{'invisible': [('is_salon_so','=',True)]}</attribute>
+				</xpath>
 
-				<!--<xpath expr="//page[@name='other_information']" position="attributes">-->
-					<!--<attribute name="attrs">{'invisible': [('is_salon_so','=',True)]}</attribute>-->
-				<!--</xpath>-->
+				<xpath expr="//page[@name='other_information']" position="attributes">
+					<attribute name="attrs">{'invisible': [('is_salon_so','=',True)]}</attribute>
+				</xpath>
 
-				<!--<xpath expr="//field[@name='order_line']/tree//field[@name='tax_id']" position="attributes">-->
-					<!--<attribute name="attrs">{'readonly': [('qty_invoiced', '&gt;', 0)],'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>-->
-				<!--</xpath>-->
+				<xpath expr="//field[@name='order_line']/tree//field[@name='tax_id']" position="attributes">
+					<attribute name="attrs">{'readonly': [('qty_invoiced', '&gt;', 0)],'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>
+				</xpath>
 
-				<!--<xpath expr="//field[@name='order_line']/tree//field[@name='price_unit']" position="attributes">-->
-					<!--<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>-->
-				<!--</xpath>-->
+				<xpath expr="//field[@name='order_line']/tree//field[@name='price_unit']" position="attributes">
+					<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>
+				</xpath>
 
-				<!--<xpath expr="//field[@name='order_line']/tree//field[@name='price_subtotal']" position="attributes">-->
-					<!--<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>-->
-				<!--</xpath>-->
+				<xpath expr="//field[@name='order_line']/tree//field[@name='price_subtotal']" position="attributes">
+					<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>
+				</xpath>
 
-				<!--<xpath expr="//group[@name='sale_total']" position="attributes">-->
-					<!--<attribute name="attrs">{'invisible': [('is_salon_so','=',True)]}</attribute>-->
-				<!--</xpath>-->
+				<xpath expr="//group[@name='sale_total']" position="attributes">
+					<attribute name="attrs">{'invisible': [('is_salon_so','=',True)]}</attribute>
+				</xpath>
 
-				<!--<xpath expr="//field[@name='order_line']/tree//field[@name='quantity_j_3']" position="attributes">-->
-					<!--<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>-->
-				<!--</xpath>-->
+				<xpath expr="//field[@name='order_line']/tree//field[@name='quantity_j_3']" position="attributes">
+					<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>
+				</xpath>
 
-				<!--<xpath expr="//field[@name='order_line']/tree//field[@name='quantity_j_2']" position="attributes">-->
-					<!--<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>-->
-				<!--</xpath>-->
+				<xpath expr="//field[@name='order_line']/tree//field[@name='quantity_j_2']" position="attributes">
+					<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>
+				</xpath>
 
-				<!--<xpath expr="//field[@name='order_line']/tree//field[@name='quantity_j_1']" position="attributes">-->
-					<!--<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>-->
-				<!--</xpath>-->
+				<xpath expr="//field[@name='order_line']/tree//field[@name='quantity_j_1']" position="attributes">
+					<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>
+				</xpath>
 
-				<!--<xpath expr="//field[@name='order_line']/tree//field[@name='hle']" position="attributes">-->
-					<!--<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>-->
-				<!--</xpath>-->
+				<xpath expr="//field[@name='order_line']/tree//field[@name='hle']" position="attributes">
+					<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>
+				</xpath>
 
-				<!--<xpath expr="//field[@name='order_line']/tree//field[@name='journey']" position="attributes">-->
-					<!--<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>-->
-				<!--</xpath>-->
-
-				<!--<xpath expr="//field[@name='order_line']/tree//field[@name='cycle_id']" position="attributes">-->
-					<!--<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>-->
-				<!--</xpath>-->
+				<xpath expr="//field[@name='order_line']/tree//field[@name='cycle_id']" position="attributes">
+					<attribute name="attrs">{'column_invisible': [('parent.is_salon_so','=',True)]}</attribute>
+				</xpath>
 
 			</field>
 		</record>
@@ -103,7 +99,7 @@
         </record>
 
 		<menuitem action="action_orders_salon" id="menu_orders_salon"
-			parent="atlas_salon_module.menu_salon_configuration" sequence="4" />
+			parent="salon_menu_root" sequence="4" />
 
 
 	</data>
